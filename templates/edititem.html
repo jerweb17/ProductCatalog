@@ -1,0 +1,49 @@
+<html>
+<head>
+  <title>Edit Item:{{item.name}}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<div class='header'>
+		<ul>
+		  <li><a class="active" href="{{ url_for('catalogMainPage')}}">Home</a></li>
+		  {% if  logged_in == 'False' %}
+		  		<li><a class="active" href="{{ url_for('showLogin')}}">Login</a></li>
+		  {% else %}
+		   		<li><a class="active" href="{{ url_for('gdisconnect')}}">Logout</a></li>
+		  {% endif %}
+		</ul>
+	</div>
+<body>
+	<div class="banner">
+		<h1>Sporting Depot</h1>
+		<h2>The Best in Sports Equipment</h2>
+	</div>
+	<div class = 'centerpane'>
+			<div class = 'panel-group-center'>
+				<h3>Edit: {{item.name}}</h3>
+				<form action="{{ url_for('editItem', item_id=item.id)}}" method = 'post'>
+					<dl>
+						<dt>Name:</dt>
+							<dd><input type ='text' size='30' name='name' placeholder='{{item.name}}'></dd>
+						<dt>Description:</dt>
+							<dd><textarea name = 'description' rows='5' cols='40' placeholder='{{item.description }}'></textarea></dd>
+						<dt>Price:</dt>
+							<dd><input type = 'text' size = '8' name='price' placeholder="{{item.price}}"></dd>
+					</dl>
+					<input type='submit' value='Save'>
+				</form>
+				<br>
+				<form action="{{ url_for('itemsByCategory',catalog_id=catalog.id,category_id=category.id)}}" method = 'get'>
+						<input type='submit' value='Cancel'>
+				</form>
+			</div>
+	</div>
+
+</body>
+</html>

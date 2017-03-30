@@ -1,0 +1,72 @@
+
+body {  background-color: #303131;
+	font-family: 'Ubuntu', serif;}/*border: 5px solid blue;*/
+h1,  h3, h4       { color: #FFFFFF; font-family: 'Ubuntu', serif;}
+h1, h2          { font-family: 'Georgia'; margin: 0; }
+h1         { border-bottom: 0px solid #EEE; font-size: 3.3em;}
+h2              { font-size: 1.3em; }
+h3 {color: #EEEEEE;}
+h3 {font-size 2em;}
+
+dt {color:#EEE;}
+p, dd              { color: #000;}
+a {text-decoration: none; color:#16161F; font-size: 1.0em;}
+ul{list-style-type: none; margin:0; padding:0; overflow: hidden;background-color: #303131}
+li{float:left;}
+li a {display: block;color: white;text-align: center;padding:14px 16px;text-decoration: none;}
+li a:hover{	background-color: #111}
+
+.result{color:#EEEEEE;}
+.ainput{font-size: 1.2em; font-family: 'Ubuntu', serif;color:#EEE;}
+
+.header{left:50%; text-align: center;font-size: 1.3em;align-self: center;}
+.banner{margin: auto auto; width:100%;background-color: #667176;text-align: center;background-color: #667176; color:#EEEEEE; margin: 0 auto;font-family: 'Ubuntu', serif;}
+
+.centerpane{margin: auto auto; width:60%; border:background-color: #667176;position: relative;
+	min-height: 180px;text-align: center;}   /*border-style: solid;border-color: white;*/
+
+/*left side of center pane*/
+.panel-group-left{width: 33%;margin: 5px auto;float:left;border-right-width: 1px;border-right-style: solid;} 
+/*middle section of center pane*/
+.panel-group-center{width: 34%;margin: 5px auto;display:inline-block;border-right-width: 1px;border-right-style: solid;} 
+/*right side of center pane*/
+.panel-group-right{width: 33%;margin: 5px auto;float: right;} 
+/*record in panel group*/
+.headrecord{display: block;margin: 2.5px auto;width:100%;background-color: #A7BFCB;font-size: 1.7em}
+.lockedrecord{display: block;margin: 2.5px auto;width:100%;background-color: #A7BFCB;font-size: 1.7em}
+.record{display: block;margin: 2px auto;width:100%;background-color: #A7BFCB;font-size: 1.4em;border-radius: 3px}
+.selectedrecord{display: block;margin: 2px auto;width:100%;background-color: #FFF5C3;font-size: 1.4em;border-radius: 3px}
+.mainXX {margin:auto; width:100% ; border: 5px solid red;background-color: #667176;text-align: center;height: 100%;}
+
+
+
+.name {width:120%;display: inline-block; float: left;font-size: x-large;}
+.description {width: 100%;font-size: large;font-weight: 300;}
+.price {text-align: right; width:50%; float: right; }
+.editdeletepane{}
+.row {color: #14464D}
+
+
+.panel-heading{background-color:#CACCCB;margin: 0 auto;}
+.panel-body{background-color:#989997;margin: 0 auto;}
+.flash          { background: #cee5F5; }
+.colcontainer{margin:0;max-width: 1400px;min-width: 350px;padding-right: 20px;min-height: 400px;}
+.col1{display:inline-block;float:left; min-width: 100px;min-height: 400px;border-right: 2px;padding-right: 20px;width: 25%;background-color: #285D51; border-color:#222;color: #FFF}
+.col2{
+  display: inline-block;
+  float: left;
+  margin-right: -1000px;
+  padding-top: 2px; /* extra space padding */
+  width: 50%;
+  background-color: #93ACA7;
+  min-height: 400px;
+}
+.col3{
+  display: inline-block;
+  float: left;
+  margin-right: -1000px;
+  padding-top: 2px; /* extra space padding */
+  width: 50%;
+  background-color: #F5F5F5;
+  min-height: 400px;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  <title>Sporting Depot</title>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu">
+	  
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+
+	</head>
+<html>
+	<div class='header'>
+		<ul>
+		  <li><a class="active" href="{{ url_for('catalogMainPage')}}">Home</a></li>
+		  {% if  logged_in == 'False' %}
+		  		<li><a class="active" href="{{ url_for('showLogin')}}">Login</a></li>
+		  {% else %}
+		   		<li><a class="active" href="{{ url_for('gdisconnect')}}">Logout</a></li>
+		  {% endif %}
+		</ul>
+	</div>
+<body>	
+	<div class='banner'>
+		<h1>Sporting Depot</h1>
+		<h2>The Best in Sports Equipment</h2>
+	</div>
+		<br>
+		<br>
+		<div class='centerpane'>
+		<div id = 'greet'><h3>Please Login Via Google Authentication</h3></div>
+			<div id="signinButton">
+				<span class="g-signin"
+					data-scope="openid email"
+					data-clientid="478495563179-5mdrnm6d39okafn62haj7tqtbr4dkoq9.apps.googleusercontent.com"
+					data-redirecturi="postmessage"
+					data-accesstype="offline"
+					data-cookiepolicy="single_host_origin"
+					data-callback="signInCallback"
+					data-approvalprompt="force">
+				</span>
+			</div>
+			
+		<div class = 'result' id="result"></div>
+		</div>
+		<script>
+		function signInCallback(authResult) {
+				  if (authResult['code']) {
+				    // Hide the sign-in button now that the user is authorized
+				    $('#signinButton').attr('style', 'display: none');
+				    // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
+				    $.ajax({
+				      type: 'POST',
+				      url: '/gconnect?state={{session['state']}}',
+				      processData: false,
+				      data: authResult['code'],
+				      contentType: 'application/octet-stream; charset=utf-8',
+				      success: function(result) {
+				        // Handle or verify the server response if necessary.
+				        if (result) {
+				        console.log('Success!');
+				          $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+				          $('#greet').html('')
+				         setTimeout(function() {
+				          window.location.href = "/main";
+				         }, 800);
+				          
+				      } else if (authResult['error']) {
+				    console.log('There was an error: ' + authResult['error']);
+				  } else {
+				        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+				         }
+				      }
+				      
+				  }); } }
+		</script>
+</body>
+</html>

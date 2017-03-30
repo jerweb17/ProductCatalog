@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{{catalog.name}}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<html>
+	<div class='header'>
+		<ul>
+		  <li><a class="active" href="{{ url_for('catalogMainPage')}}">Home</a></li>
+		  {% if  logged_in == 'False' %}
+		  		<li><a class="active" href="{{ url_for('showLogin')}}">Login</a></li>
+		  {% else %}
+		   		<li><a class="active" href="{{ url_for('gdisconnect')}}">Logout</a></li>
+		  {% endif %}
+		</ul>
+	</div>
+<body>
+	<div class='banner'>
+		<h1>Sporting Depot</h1>
+		<h2>{{catalog.name}}</h2>
+	</div>
+	<div class = 'centerpane'>
+			<div class="panel-group-left">
+				<div class="headrecord">Catalogs</div>
+					{% for c in catalogs %}
+						{% if c==catalog %}
+					    <div class = 'selectedrecord'>
+					      		<a href ="{{ url_for('categoriesByCatalog',catalog_id=c.id)}}">{{c.name}}</a>						
+						</div>
+						{% else %}
+						<div class = 'record'>
+					      		<a href ="{{ url_for('categoriesByCatalog',catalog_id=c.id)}}">{{c.name}}</a>						
+						</div>
+						{% endif %}
+					{% endfor %}
+					<br>
+					<form action="{{ url_for('editCatalog',catalog_id=catalog.id)}}" method = 'get'>
+						<input type='submit' value='Edit {{catalog.name}}'>
+					</form>
+					<br>
+					<form action="{{ url_for('deleteCatalog',catalog_id=catalog.id)}}" method = 'get'>
+						<input type='submit' value='Delete {{catalog.name}}'>
+					</form>
+			</div>
+			<div class="panel-group-center">
+				<div class="headrecord">Categories</div>
+					{% for c in categories %}
+						<div class="record">
+							<a href ="{{ url_for('itemsByCategory',catalog_id=catalog.id,category_id=c.id)}}">{{c.name}}</a>
+						</div>
+					{% endfor %}
+					<br>
+					<form action="{{ url_for('newCategory',catalog_id=catalog.id)}}" method = 'get'>
+						<input type='submit' value='Create New Category'>
+					</form>
+					<div class = 'flash'>
+						{% with messages = get_flashed_messages() %}
+					      {% if messages %}
+					          
+					        <ul>
+					        {% for message in messages %}
+					            <li> <strong> {{ message }} </strong> </li>
+					        {% endfor %}
+					        </ul>
+					        {% endif %}
+					    {% endwith %}
+					</div>
+			</div>
+			<div class="panel-group-right">
+				<div class="headrecord">Items</div>
+					{% for i in items %}
+						<div class="record">
+							<a href ="{{ url_for('itemsByCategory',catalog_id=catalog.id,category_id=c.id)}}">{{i.name}}</a>
+						</div>
+					{% endfor %}
+				<br>
+				<li><a href ="{{ url_for('catalogMainPage')}}" >Back</a></li>
+			</div>
+			<div class = 'flash'>
+					{% with messages = get_flashed_messages() %}
+				      {% if messages %}
+				          
+				        <ul>
+				        {% for message in messages %}
+				            <li> <strong> {{ message }} </strong> </li>
+				        {% endfor %}
+				        </ul>
+				        {% endif %}
+				    {% endwith %}
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
